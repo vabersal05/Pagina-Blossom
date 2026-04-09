@@ -1,0 +1,10 @@
+<div class="login-container">
+  <h2>Iniciar Sesión</h2>
+
+  <input type="text" [(ngModel)]="usuario" placeholder="Usuario" />
+  <input type="password" [(ngModel)]="contrasena" placeholder="Contraseña" />
+
+  <button (click)="iniciarSesion()">Entrar</button>
+
+  <p>¿No tienes cuenta? <a routerLink="/registrarse">Regístrate aquí</a></p>
+</div>

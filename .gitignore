@@ -1,0 +1,7 @@
+# Backend
+Backend/node_modules/
+
+# Angular
+blossom-floristeria/node_modules/
+blossom-floristeria/dist/
+blossom-floristeria/.angular/

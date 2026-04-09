@@ -1,0 +1,12 @@
+<div class="register-container">
+  <h2>Crear Cuenta</h2>
+
+  <input type="text" [(ngModel)]="nombre" placeholder="Nombre completo" />
+  <input type="email" [(ngModel)]="email" placeholder="Correo electrónico" />
+  <input type="password" [(ngModel)]="contrasena" placeholder="Contraseña" />
+  <input type="password" [(ngModel)]="confirmarContrasena" placeholder="Confirmar contraseña" />
+
+  <button (click)="registrarse()">Registrarse</button>
+
+  <p>¿Ya tienes cuenta? <a routerLink="/iniciar-sesion">Inicia sesión aquí</a></p>
+</div>

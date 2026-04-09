@@ -1,0 +1,49 @@
+<div class="admin-container">
+  <h2>Panel de Administrador</h2>
+
+  <button (click)="abrirFormulario()">+ Agregar Producto</button>
+
+  <div class="formulario" *ngIf="mostrarFormulario">
+    <h3>{{ editando ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
+
+    <input type="text" [(ngModel)]="productoForm.nombre" placeholder="Nombre" />
+    <input type="text" [(ngModel)]="productoForm.categoria" placeholder="Categoría" />
+    <input type="text" [(ngModel)]="productoForm.marca" placeholder="Marca" />
+    <input type="number" [(ngModel)]="productoForm.precio" placeholder="Precio" />
+    <input type="number" [(ngModel)]="productoForm.stock" placeholder="Stock" />
+    <input type="file" (change)="seleccionarImagen($event)" accept="image/*" />
+    <img *ngIf="productoForm.imagen" [src]="productoForm.imagen" width="100" />
+    <textarea [(ngModel)]="productoForm.descripcion" placeholder="Descripción"></textarea>
+
+    <button (click)="guardarProducto()">{{ editando ? 'Actualizar' : 'Guardar' }}</button>
+    <button (click)="mostrarFormulario = false">Cancelar</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Marca</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let producto of productos">
+        <td>{{ producto.id }}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.categoria }}</td>
+        <td>{{ producto.marca }}</td>
+        <td>{{ producto.precio }}</td>
+        <td>{{ producto.stock }}</td>
+        <td>
+          <button (click)="editarProducto(producto)">Editar</button>
+          <button (click)="eliminarProducto(producto.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
