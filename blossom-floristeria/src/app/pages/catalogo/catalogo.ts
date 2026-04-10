@@ -4,6 +4,7 @@ import { ProductoDetalle } from "../producto-detalle/producto-detalle";
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { Auth } from '../../services/auth';
+import { CarritoService } from '../../services/carrito';
 
 @Component({
   selector: 'app-catalogo', 
@@ -16,7 +17,7 @@ export class Catalogo implements OnInit {
   productos: Producto[] = [];
   productoSeleccionado: Producto | null = null;
   
-  constructor(private productosService: Productos, private cdr: ChangeDetectorRef, public authService: Auth) {}
+  constructor(private productosService: Productos, private cdr: ChangeDetectorRef, public authService: Auth, public carritoService: CarritoService) {}
   
   ngOnInit(): void {
     this.productosService.getProductos().subscribe(data => {

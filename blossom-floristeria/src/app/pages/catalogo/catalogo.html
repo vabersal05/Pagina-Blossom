@@ -27,12 +27,12 @@
                 <p class="precio">${{productoSeleccionado.precio}}</p>
 
                 <div class="acciones">
-                <button>-</button>
-                <button>+</button>
-                <button *ngIf="authService.isLoggedIn()">Agregar al carrito</button>
-
+                <button 
+                    (click)="carritoService.agregar(productoSeleccionado)"
+                    [disabled]="!authService.isLoggedIn()">
+                    Agregar al carrito
+                </button>
                 <p *ngIf="!authService.isLoggedIn()" class="mensaje-login">Inicia sesión para comprar</p>
-                <button class="eliminar">Eliminar</button>
                 </div>
             </div>
             </div>
