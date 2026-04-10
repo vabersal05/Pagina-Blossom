@@ -17,7 +17,7 @@
 
   <!-- SI YA INICIÓ SESIÓN -->
   <ng-container *ngIf="authService.isLoggedIn()">
-    <a routerLink="/carrito">Carrito</a>
+    <a (click)="carritoService.toggle()">🛒 ({{ carritoService.cantidadTotal() }})</a>
     <a (click)="logout()">Cerrar sesión</a>
   </ng-container>
 

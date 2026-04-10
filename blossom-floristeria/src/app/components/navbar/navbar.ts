@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {RouterLink} from "@angular/router";
 import { Auth } from '../../services/auth';
 import { NgIf } from '@angular/common';
+import { CarritoService } from '../../services/carrito';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,7 @@ import { NgIf } from '@angular/common';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  constructor(public authService: Auth) {}
+  constructor(public authService: Auth, public carritoService: CarritoService) {}
 
   logout() {
     this.authService.logout();

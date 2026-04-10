@@ -3,3 +3,34 @@
 <router-outlet></router-outlet>
 
 <app-footer></app-footer>
+
+<!-- FONDO OSCURO -->
+<div class="overlay" *ngIf="carritoService.abierto()" (click)="carritoService.cerrar()"></div>
+
+<!-- CARRITO LATERAL -->
+<div class="drawer" [class.open]="carritoService.abierto()">
+
+  <h2>Tu carrito</h2>
+
+  <div *ngFor="let item of carritoService.carrito()">
+
+    <img [src]="'/images/catalogo/' + item.producto.imagen" width="60">
+
+    <div>
+      <p>{{item.producto.nombre}}</p>
+      <p>${{item.producto.precio}}</p>
+
+      <div>
+        <button (click)="carritoService.disminuir(item)">-</button>
+        {{item.cantidad}}
+        <button (click)="carritoService.aumentar(item)">+</button>
+      </div>
+    </div>
+
+    <button (click)="carritoService.eliminar(item)">❌</button>
+
+  </div>
+
+  <h3>Total: ${{carritoService.total()}}</h3>
+
+</div>

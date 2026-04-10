@@ -1,8 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NgIf, NgFor } from '@angular/common';
 
 import { Navbar } from './components/navbar/navbar';
 import { Footer } from './components/footer/footer';
+import { CarritoService } from './services/carrito';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +12,14 @@ import { Footer } from './components/footer/footer';
   imports: [
     RouterOutlet,
     Navbar,
-    Footer
+    Footer,
+    NgIf,
+    NgFor
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
+  constructor(public carritoService: CarritoService) {}
   protected readonly title = signal('blossom-floristeria');
 }
