@@ -5,13 +5,20 @@
   </div>
 
   <ul class="menu">
-    <li><a routerLink="/">Inicio</a></li>
+    <li><a routerLink="/home">Inicio</a></li>
     <li><a routerLink="/catalogo">Catálogo</a></li>
     <li><a routerLink="/nosotros">Nosotros</a></li>
   </ul>
 
-  <div class="carrito">
-    <a routerLink="/iniciar-sesion">Iniciar Sesión</a>
-  </div>
+  <!-- SI NO HA INICIADO SESIÓN -->
+  <ng-container *ngIf="!authService.isLoggedIn()">
+    <a routerLink="/iniciar-sesion">Iniciar sesión</a>
+  </ng-container>
+
+  <!-- SI YA INICIÓ SESIÓN -->
+  <ng-container *ngIf="authService.isLoggedIn()">
+    <a routerLink="/carrito">Carrito</a>
+    <a (click)="logout()">Cerrar sesión</a>
+  </ng-container>
 
 </nav>

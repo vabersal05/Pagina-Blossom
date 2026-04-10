@@ -3,6 +3,7 @@ import { Router, RouterModule } from "@angular/router";
 import { FormsModule } from "@angular/forms";
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-iniciar-sesion',
@@ -14,18 +15,22 @@ export class IniciarSesion {
   usuario = '';
   contrasena = '';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(private router: Router, private http: HttpClient, private authService: Auth) {}
 
   iniciarSesion() {
     const datos = { usuario: this.usuario, contrasena: this.contrasena };
 
     this.http.post<any>('http://localhost:3000/api/iniciar-sesion', datos).subscribe({
       next: (res) => {
-        localStorage.setItem('rol', res.rol);
+        this.authService.login({
+          usuario: this.usuario,
+          rol: res.rol
+        });
+
         if (res.rol === 'admin') {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/cliente']);
+          this.router.navigate(['/home']);
         }
       },
       error: () => {
