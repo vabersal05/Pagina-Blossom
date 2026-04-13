@@ -18,11 +18,11 @@ export const routes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'iniciar-sesion', component: IniciarSesion },
   { path: 'carrito', component: Carrito },
-  { path: 'producto/:id', component: ProductoDetalle },
   { path: 'admin', component: Admin },
   { path: 'cliente', component: Cliente },
   { path: 'registrarse', component: Registrarse },
   { path: 'home', component: Home },
   { path: 'mensajes', component: MensajesComponent },
   { path: 'nosotros', component: Nosotros },
+  { path: 'productos/:id', component: Catalogo }
 ];
