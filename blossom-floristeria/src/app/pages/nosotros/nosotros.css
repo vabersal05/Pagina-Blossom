@@ -1,0 +1,60 @@
+.nosotros {
+  padding: 60px 40px;
+  text-align: center;
+  background: #fff0f6;
+}
+
+.nosotros h1 {
+  font-size: 40px;
+  color: #d93d83;
+}
+
+.subtitulo {
+  margin-top: 10px;
+  color: #7a2c4f;
+  font-size: 18px;
+}
+
+/* contenedor de cards */
+.equipo {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* card */
+.card-persona {
+  width: 280px;
+  background: #ffd6e7;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  padding-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.card-persona:hover {
+  transform: translateY(-8px);
+}
+
+/* imagen */
+.card-persona img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* texto */
+.card-persona h3 {
+  margin: 15px 0 5px;
+  color: #d93d83;
+}
+
+.card-persona p {
+  padding: 0 15px;
+  font-size: 14px;
+  color: #5a2a3a;
+  line-height: 1.4;
+}
