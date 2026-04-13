@@ -1,31 +1,29 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from "@angular/router";
-import { FormsModule } from "@angular/forms";
-import { HttpClient } from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
-import { Auth } from '../../services/auth';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-iniciar-sesion',
-  imports: [FormsModule, RouterModule, HttpClientModule],
+  imports: [RouterModule, HttpClientModule, ReactiveFormsModule],
   templateUrl: './iniciar-sesion.html',
   styleUrl: './iniciar-sesion.css',
 })
 export class IniciarSesion {
-  usuario = '';
-  contrasena = '';
 
-  constructor(private router: Router, private http: HttpClient, private authService: Auth) {}
+  form = new FormGroup({
+    usuario: new FormControl('', [Validators.required]),
+    contrasena: new FormControl('', [Validators.required, Validators.minLength(3)])
+  });
+
+  constructor(private router: Router, private http: HttpClient) {}
 
   iniciarSesion() {
-    const datos = { usuario: this.usuario, contrasena: this.contrasena };
+    if (this.form.invalid) return;
 
-    this.http.post<any>('http://localhost:3000/api/iniciar-sesion', datos).subscribe({
+    this.http.post<any>('http://localhost:3000/api/iniciar-sesion', this.form.value).subscribe({
       next: (res) => {
-        this.authService.login({
-          usuario: this.usuario,
-          rol: res.rol
-        });
+        localStorage.setItem('rol', res.rol);
 
         if (res.rol === 'admin') {
           this.router.navigate(['/admin']);
@@ -33,9 +31,7 @@ export class IniciarSesion {
           this.router.navigate(['/home']);
         }
       },
-      error: () => {
-        alert('Usuario o contraseña incorrectos');
-      }
+      error: () => alert('Usuario o contraseña incorrectos')
     });
   }
 }

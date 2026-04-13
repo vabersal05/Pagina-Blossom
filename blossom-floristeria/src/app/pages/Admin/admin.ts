@@ -49,6 +49,7 @@ export class Admin implements OnInit {
     };
     reader.readAsDataURL(archivo);
   }
+  
   // ABRIR FORMULARIO PARA CREAR
   abrirFormulario() {
     this.editando = false;

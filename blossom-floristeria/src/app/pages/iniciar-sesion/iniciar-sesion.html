@@ -1,10 +1,21 @@
 <div class="login-container">
   <h2>Iniciar Sesión</h2>
 
-  <input type="text" [(ngModel)]="usuario" placeholder="Usuario" />
-  <input type="password" [(ngModel)]="contrasena" placeholder="Contraseña" />
+  <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
 
-  <button (click)="iniciarSesion()">Entrar</button>
+    <input type="text" formControlName="usuario" placeholder="Usuario" />
+    <p *ngIf="form.get('usuario')?.invalid && form.get('usuario')?.touched">
+      Usuario obligatorio
+    </p>
+
+    <input type="password" formControlName="contrasena" placeholder="Contraseña" />
+    <p *ngIf="form.get('contrasena')?.invalid && form.get('contrasena')?.touched">
+      Contraseña obligatoria (mínimo 3 caracteres)
+    </p>
+
+    <button type="submit" [disabled]="form.invalid">Entrar</button>
+
+  </form>
 
   <p>¿No tienes cuenta? <a routerLink="/registrarse">Regístrate aquí</a></p>
 </div>
