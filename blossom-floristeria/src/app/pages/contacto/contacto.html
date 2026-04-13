@@ -1,1 +1,11 @@
-<p>contacto works!</p>
+<h2>Contacto 🌸</h2>
+
+<form (ngSubmit)="enviar()" #form="ngForm" class="form-contacto">
+  <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre" required />
+
+  <input type="email" name="correo" placeholder="Correo" [(ngModel)]="correo" required email />
+
+  <textarea name="mensaje" placeholder="Mensaje" [(ngModel)]="mensaje" required></textarea>
+
+  <button type="submit" [disabled]="form.invalid">Enviar</button>
+</form>

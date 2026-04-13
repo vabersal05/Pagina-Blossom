@@ -1,0 +1,28 @@
+.form-contacto {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: auto;
+  gap: 10px;
+}
+
+.form-contacto input,
+.form-contacto textarea {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.form-contacto button {
+  background: #d93d83;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.form-contacto button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}

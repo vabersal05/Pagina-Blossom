@@ -1,0 +1,24 @@
+<!--<h2>Mensajes de contactowaw</h2>
+
+<div *ngIf="mensajes.length === 0">No hay mensajes aún.</div>
+
+<div *ngFor="let m of mensajes">
+  <hr />
+  <p><strong>Nombre:</strong> {{ m.nombre }}</p>
+  <p><strong>Correo:</strong> {{ m.correo }}</p>
+  <p><strong>Mensaje:</strong> {{ m.mensaje }}</p>
+</div>
+-->
+<h2>Mensajes recibidos 📩</h2>
+
+<div *ngIf="mensajes.length > 0; else vacio" class="mensajes">
+  <div *ngFor="let m of mensajes" class="card">
+    <p><b>Nombre:</b> {{ m.nombre }}</p>
+    <p><b>Correo:</b> {{ m.correo }}</p>
+    <p>{{ m.mensaje }}</p>
+  </div>
+</div>
+
+<ng-template #vacio>
+  <p class="empty">No hay mensajes aún 🌸</p>
+</ng-template>
