@@ -13,7 +13,7 @@
     </div>
     
     <!-- MODAL -->
-    <div class="modal" *ngIf="productoSeleccionado">
+    <div class="modal" *ngIf="productoSeleccionado" (click)="cerrarDetalle()">
         <div class="modal-content">
 
             <span class="cerrar" (click)="cerrarDetalle()">×</span>
