@@ -6,11 +6,12 @@ import { ChangeDetectorRef } from '@angular/core';
 import { Auth } from '../../services/auth';
 import { CarritoService } from '../../services/carrito';
 import { Router, ActivatedRoute } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-catalogo', 
   standalone: true,
-  imports: [ProductoDetalle, NgFor, NgIf],
+  imports: [ProductoDetalle, NgFor, NgIf, NgClass],
   templateUrl: './catalogo.html',
   styleUrl: './catalogo.css',
 })

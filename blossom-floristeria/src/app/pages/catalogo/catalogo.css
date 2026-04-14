@@ -1,3 +1,6 @@
+body{
+  padding-top: 70px;
+}
 /* HEADER */
 .header {
   text-align: center;
@@ -134,4 +137,9 @@ app-producto-detalle {
     transform: scale(1);
     opacity: 1;
   }
+}
+
+.deshabilitado {
+  background: #ccc;
+  cursor: not-allowed;
 }
