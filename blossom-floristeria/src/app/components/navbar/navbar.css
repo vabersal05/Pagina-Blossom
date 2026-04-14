@@ -63,3 +63,14 @@
   background: #b92f6b;
   transform: scale(1.05);
 }
+
+.carrito {
+  font-size: 28px; /* lo hace más grande */
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.carrito:hover {
+  transform: scale(1.2);
+}

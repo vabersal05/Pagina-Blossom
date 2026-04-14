@@ -62,19 +62,3 @@ body {
   color: #5a2a3a;
   line-height: 1.4;
 }
-
-.contacto-home {
-  background: #ffe4ec;
-  padding: 60px;
-  text-align: center;
-}
-
-.btn-contacto {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #d93d83;
-  color: white;
-  border-radius: 20px;
-  text-decoration: none;
-}
