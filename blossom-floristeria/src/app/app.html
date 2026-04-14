@@ -1,8 +1,13 @@
-<app-navbar></app-navbar>
+<app-navbar *ngIf="authService.getUser()?.rol !== 'admin'"></app-navbar>
+
+<app-navbar-admin *ngIf="authService.getUser()?.rol === 'admin'"></app-navbar-admin>
+
 
 <router-outlet></router-outlet>
 
-<app-footer></app-footer>
+<app-footer *ngIf="authService.getUser()?.rol !== 'admin'"></app-footer>
+
+<app-footer-admin *ngIf="authService.getUser()?.rol === 'admin'"></app-footer-admin>
 
 <!-- OVERLAY -->
 <div class="overlay" *ngIf="carritoService.abierto()" (click)="carritoService.cerrar()"></div>
@@ -10,7 +15,7 @@
 <!-- DRAWER -->
 <div class="drawer" [class.open]="carritoService.abierto()">
 
-  <h2 class="titulo">🛒 Tu carrito</h2>
+  <h2 class="titulo">Tu carrito</h2>
 
   <!-- VACÍO -->
   <div *ngIf="carritoService.carrito().length === 0" class="vacio">

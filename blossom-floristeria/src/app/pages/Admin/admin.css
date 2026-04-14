@@ -2,19 +2,19 @@
   max-width: 900px;
   margin: auto;
   padding: 20px;
-}
+} 
 
 .admin-container > button {
   padding: 8px 14px;
   border-radius: 10px;
   border: none;
-  background: #3498db;
+  background: #bb47e8;
   color: white;
   cursor: pointer;
 }
 
 .formulario {
-  background: white;
+  background: rgb(248, 218, 252);
   padding: 15px;
   border-radius: 15px;
   margin: 20px 0;
@@ -44,7 +44,7 @@
 }
 
 .formulario button[type='submit'] {
-  background: #2ecc71;
+  background: #b22ecc;
   color: white;
 }
 
@@ -65,11 +65,11 @@ td {
 }
 
 thead {
-  background: #f4f4f4;
+  background: #f3b2f8;
 }
 
 tr:nth-child(even) {
-  background: #fafafa;
+  background: #fbf0fc;
 }
 
 td button {
@@ -80,11 +80,12 @@ td button {
 }
 
 td button:first-child {
-  background: #3498db;
+  background: #ae40c7;
+  margin-right: 10px;
   color: white;
 }
 
 td button:last-child {
-  background: #e74c3c;
+  background: #de76f1;
   color: white;
 }

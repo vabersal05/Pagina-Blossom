@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-admin',
@@ -10,7 +11,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './admin.css',
 })
 export class Admin implements OnInit {
-
+ 
   productos: any[] = [];
   mostrarFormulario = false;
   editando = false;
@@ -26,7 +27,7 @@ export class Admin implements OnInit {
     descripcion: new FormControl('', [Validators.required, Validators.minLength(10)])
   });
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.obtenerProductos();
@@ -38,9 +39,12 @@ export class Admin implements OnInit {
 
   obtenerProductos() {
     this.http.get<any[]>('http://localhost:3000/api/productos').subscribe({
-      next: (res) => this.productos = res,
-      error: () => alert('Error al obtener productos')
-    });
+    next: (res) => {
+      this.productos = res;
+      this.cdr.detectChanges();
+    },
+    error: () => alert('Error al obtener productos')
+  });
   }
 
   seleccionarImagen(evento: any) {

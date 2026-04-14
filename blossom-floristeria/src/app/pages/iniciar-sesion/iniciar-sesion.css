@@ -2,7 +2,7 @@
   max-width: 400px;
   margin: 60px auto;
   padding: 25px;
-  background: white;
+  background: rgb(255, 228, 236);
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -26,14 +26,14 @@
   padding: 10px;
   border-radius: 10px;
   border: none;
-  background: #3498db;
+  background: #db3469;
   color: white;
   cursor: pointer;
   margin-top: 10px;
 }
 
 .login-container button:hover {
-  background: #2980b9;
+  background: #a02456;
 }
 
 .login-container p {
@@ -42,7 +42,7 @@
 }
 
 .login-container a {
-  color: #3498db;
+  color: #db347f;
   text-decoration: none;
 }
 
