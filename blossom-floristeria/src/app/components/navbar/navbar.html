@@ -8,7 +8,6 @@
     <li><a routerLink="/home">Inicio</a></li>
     <li><a routerLink="/catalogo">Catálogo</a></li>
     <li><a routerLink="/nosotros">Nosotros</a></li>
-    <!--<li><a href="#contacto">Contáctanos</a></li>-->
     <li><a (click)="irAContacto()">Contáctanos</a></li>
   </ul>
 
@@ -20,6 +19,7 @@
   <!-- SI YA INICIÓ SESIÓN -->
   <ng-container *ngIf="authService.isLoggedIn()">
     <a (click)="carritoService.toggle()">🛒 ({{ carritoService.cantidadTotal() }})</a>
-    <a (click)="logout()">Cerrar sesión</a>
+    <a (click)="logout()" class="login-link">Cerrar sesión</a>
   </ng-container>
 </nav>
+ 

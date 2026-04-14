@@ -18,7 +18,7 @@ export class Navbar {
     private router: Router,
   ) {}
 
-  logout() {
+  logout() { 
     this.authService.logout();
   }
 

@@ -1,7 +1,7 @@
 <div class="catalogo-principal">
   <div class="header">
     <h1>Catálogo de Productos</h1>
-    <p>Explora nuestros productos disponibles</p>
+    <p class="subtitulo">Explora nuestros productos disponibles</p>
   </div>
 
   <div class="catalogo">
@@ -11,8 +11,8 @@
       (click)="seleccionarProducto(producto)"
     >
     </app-producto-detalle>
-  </div>
-
+  </div> 
+ 
   <!-- MODAL -->
   <div class="modal" *ngIf="productoSeleccionado" (click)="cerrarDetalle()">
     <div class="modal-content">

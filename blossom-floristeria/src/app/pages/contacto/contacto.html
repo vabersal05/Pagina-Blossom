@@ -1,7 +1,9 @@
 <section class="contacto-home">
-  <h2>Contacto</h2>
-  <p>¿Tienes dudas o quieres un arreglo personalizado?</p>
-
+  <div class="header">
+    <h1>Contacto</h1>
+    <p class="subtitulo">¿Tienes dudas o quieres un arreglo personalizado?</p>
+  </div>
+ 
   <form (ngSubmit)="enviar()" #form="ngForm" class="form-contacto">
     <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre" required />
 

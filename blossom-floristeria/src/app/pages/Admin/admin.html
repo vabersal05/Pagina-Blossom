@@ -1,8 +1,11 @@
 <div class="admin-container">
-  <h2>Panel de Administrador</h2>
+  <div class="header">
+    <h1>Panel de Administrador</h1>
+    <p class="subtitulo">Toma el control de tus productos</p>
+  </div>
 
-  <button (click)="abrirFormulario()">+ Agregar Producto</button>
-
+  <button (click)="abrirFormulario()">Agregar Producto</button>
+ 
   <div class="formulario" *ngIf="mostrarFormulario">
     <h3>{{ editando ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
 
@@ -36,7 +39,7 @@
         <span *ngIf="campos['stock'].touched && campos['stock'].errors?.['min']">El stock no puede ser negativo</span>
       </div>
 
-      <div>
+      <div> 
         <input type="file" (change)="seleccionarImagen($event)" accept="image/*" />
         <img *ngIf="campos['imagen'].value" [src]="campos['imagen'].value" width="100" />
       </div>

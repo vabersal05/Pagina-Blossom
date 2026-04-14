@@ -1,7 +1,3 @@
-body {
-  padding-top: 70px;
-}
-
 .form-contacto input,
 .form-contacto textarea {
   padding: 10px;
@@ -84,38 +80,8 @@ body {
   transform: translateY(-1px);
 }
 
-.contacto-home h2 {
-  font-size: 32px;
-  color: #d93d83;
-  text-align: center;
-  position: relative;
-}
-
-.contacto-home h2::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 3px;
-  background: #d93d83;
-  margin: 10px auto 0;
-  border-radius: 5px;
-}
-
-.contacto-home p {
-  color: #777;
-  margin-top: 5px;
-  margin-bottom: 30px;
-}
-
 .contacto-home .contacto-home {
   text-align: center;
-  padding: 40px 20px 60px;
   max-width: 900px;
   margin: 0 auto;
-}
-
-.contacto-home p {
-  text-align: center;
-  color: #7a2c4f;
-  margin-bottom: 25px;
 }

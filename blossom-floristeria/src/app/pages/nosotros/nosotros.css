@@ -1,80 +1,50 @@
-body {
-  padding-top: 70px;
-}
 
 .nosotros {
-  padding: 60px 40px;
   text-align: center;
-  background: #fff0f6;
 }
 
-.nosotros h1 {
-  font-size: 40px;
-  color: #d93d83;
+.bloque-info {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: left;
+  background: rgb(255, 225, 233);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  line-height: 1.7;
+}
+ 
+.bloque-info p {
+  margin-bottom: 15px;
+  color: #444;
 }
 
-.subtitulo {
-  margin-top: 10px;
-  color: #7a2c4f;
-  font-size: 18px;
-}
-
-/* contenedor de cards */
-.equipo {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
+.frase {
   margin-top: 40px;
-  flex-wrap: wrap;
-}
-
-/* card */
-.card-persona {
-  width: 280px;
-  background: #ffd6e7;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  padding-bottom: 20px;
-  transition: transform 0.3s ease;
-}
-
-.card-persona:hover {
-  transform: translateY(-8px);
-}
-
-/* imagen */
-.card-persona img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-
-/* texto */
-.card-persona h3 {
-  margin: 15px 0 5px;
-  color: #d93d83;
-}
-
-.card-persona p {
-  padding: 0 15px;
-  font-size: 14px;
-  color: #5a2a3a;
-  line-height: 1.4;
+  font-size: 22px;
+  color: #e91e63;
+  font-style: italic;
 }
 
 .contacto-home {
-  background: #ffe4ec;
-  padding: 60px;
-  text-align: center;
+  margin-top: 60px;
+  padding: 40px;
+  background: #ffe4ee;
+  border-radius: 20px;
 }
 
 .btn-contacto {
   display: inline-block;
-  margin-top: 20px;
-  padding: 12px 25px;
-  background: #d93d83;
+  margin-top: 15px;
+  background: #e91e63;
   color: white;
-  border-radius: 20px;
+  padding: 10px 20px;
+  border-radius: 25px;
   text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-contacto:hover {
+  background: #c2185b;
+  transform: scale(1.05);
 }

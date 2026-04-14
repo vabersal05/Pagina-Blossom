@@ -1,17 +1,17 @@
-.navbar {
+.navbar-admin {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 40px;
-  background: #f9bdcf;
+  background: #f1bdf9;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   z-index: 1000;
-}
-
+} 
+ 
 .menu {
   display: flex;
   list-style: none;
@@ -25,14 +25,8 @@
 }
 
 .menu a:hover {
-  color: #e91e63;
+  color: #a525bb;
   cursor: pointer;
-}
-
-.carrito {
-  font-size: 22px;
-  cursor: pointer;
-  color: #e91e63;
 }
 
 .logo {
@@ -42,7 +36,7 @@
   cursor: pointer;
   font-weight: bold;
   font-size: 20px;
-  color: #e91e63;
+  color: #9b16b6;
 }
 
 .logo img {
@@ -51,16 +45,17 @@
 }
 
 .login-link {
-  background: #d93d83;
+  background: #c93dd9;
   color: white;
   padding: 8px 15px;
   border-radius: 20px;
   text-decoration: none;
   transition: 0.3s;
+  border: none;
 }
 
 .login-link:hover {
-  background: #b92f6b;
+  background: #94349f;
   cursor: pointer;
   transform: scale(1.05);
 }
