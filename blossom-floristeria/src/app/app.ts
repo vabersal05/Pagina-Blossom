@@ -22,7 +22,8 @@ import { CarritoService } from './services/carrito';
     FooterAdmin,
     NgIf,
     NgFor,
-    CurrencyPipe
+    CurrencyPipe,
+    HttpClientModule
   ],
   templateUrl: './app.html',
   styleUrl: './app.css'
