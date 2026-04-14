@@ -6,17 +6,51 @@
   <div class="formulario" *ngIf="mostrarFormulario">
     <h3>{{ editando ? 'Editar Producto' : 'Nuevo Producto' }}</h3>
 
-    <input type="text" [(ngModel)]="productoForm.nombre" placeholder="Nombre" />
-    <input type="text" [(ngModel)]="productoForm.categoria" placeholder="Categoría" />
-    <input type="text" [(ngModel)]="productoForm.marca" placeholder="Marca" />
-    <input type="number" [(ngModel)]="productoForm.precio" placeholder="Precio" />
-    <input type="number" [(ngModel)]="productoForm.stock" placeholder="Stock" />
-    <input type="file" (change)="seleccionarImagen($event)" accept="image/*" />
-    <img *ngIf="productoForm.imagen" [src]="productoForm.imagen" width="100" />
-    <textarea [(ngModel)]="productoForm.descripcion" placeholder="Descripción"></textarea>
+    <form [formGroup]="formularioProducto" (ngSubmit)="guardarProducto()">
 
-    <button (click)="guardarProducto()">{{ editando ? 'Actualizar' : 'Guardar' }}</button>
-    <button (click)="mostrarFormulario = false">Cancelar</button>
+      <div>
+        <input type="text" formControlName="nombre" placeholder="Nombre" />
+        <span *ngIf="campos['nombre'].touched && campos['nombre'].errors?.['required']">El nombre es obligatorio</span>
+        <span *ngIf="campos['nombre'].touched && campos['nombre'].errors?.['minlength']">Mínimo 3 caracteres</span>
+      </div>
+
+      <div>
+        <input type="text" formControlName="categoria" placeholder="Categoría" />
+        <span *ngIf="campos['categoria'].touched && campos['categoria'].errors?.['required']">La categoría es obligatoria</span>
+      </div>
+
+      <div>
+        <input type="text" formControlName="marca" placeholder="Marca" />
+        <span *ngIf="campos['marca'].touched && campos['marca'].errors?.['required']">La marca es obligatoria</span>
+      </div>
+
+      <div>
+        <input type="number" formControlName="precio" placeholder="Precio" />
+        <span *ngIf="campos['precio'].touched && campos['precio'].errors?.['required']">El precio es obligatorio</span>
+        <span *ngIf="campos['precio'].touched && campos['precio'].errors?.['min']">El precio debe ser mayor a 0</span>
+      </div>
+
+      <div>
+        <input type="number" formControlName="stock" placeholder="Stock" />
+        <span *ngIf="campos['stock'].touched && campos['stock'].errors?.['required']">El stock es obligatorio</span>
+        <span *ngIf="campos['stock'].touched && campos['stock'].errors?.['min']">El stock no puede ser negativo</span>
+      </div>
+
+      <div>
+        <input type="file" (change)="seleccionarImagen($event)" accept="image/*" />
+        <img *ngIf="campos['imagen'].value" [src]="campos['imagen'].value" width="100" />
+      </div>
+
+      <div>
+        <textarea formControlName="descripcion" placeholder="Descripción"></textarea>
+        <span *ngIf="campos['descripcion'].touched && campos['descripcion'].errors?.['required']">La descripción es obligatoria</span>
+        <span *ngIf="campos['descripcion'].touched && campos['descripcion'].errors?.['minlength']">Mínimo 10 caracteres</span>
+      </div>
+
+      <button type="submit">{{ editando ? 'Actualizar' : 'Guardar' }}</button>
+      <button type="button" (click)="mostrarFormulario = false">Cancelar</button>
+
+    </form>
   </div>
 
   <table>
