@@ -28,8 +28,9 @@
 
                 <div class="acciones">
                 <button 
-                    (click)="carritoService.agregar(productoSeleccionado)"
-                    [disabled]="!authService.isLoggedIn()">
+                    [disabled]="!authService.isLoggedIn() || productoSeleccionado.stock === 0"
+                    [ngClass]="{ 'deshabilitado': productoSeleccionado.stock === 0 }"
+                    (click)="carritoService.agregar(productoSeleccionado)">
                     Agregar al carrito
                 </button>
                 <p *ngIf="!authService.isLoggedIn()" class="mensaje-login">Inicia sesión para comprar</p>

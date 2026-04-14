@@ -1,32 +1,160 @@
-/* FONDO */
+body{
+  padding-top: 70px;
+}
+/* OVERLAY (pero sin tapar navbar) */
 .overlay {
   position: fixed;
-  top: 0;
+  top: 70px; 
   left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.5);
+  height: calc(100% - 70px);
+
+  background: rgba(0,0,0,0.4);
   z-index: 998;
 }
 
-/* PANEL */
+/* DRAWER */
 .drawer {
   position: fixed;
-  top: 0;
-  right: -400px; /* oculto */
-  width: 350px;
-  height: 100%;
+  top: 70px; 
+  right: -400px;
 
-  background: white;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+  width: 350px;
+  height: calc(100% - 70px);
+
+  background: #fff;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.15);
 
   padding: 20px;
-  z-index: 999;
 
+  display: flex;
+  flex-direction: column;
+
+  z-index: 999;
   transition: right 0.3s ease;
 }
 
 /* CUANDO SE ABRE */
 .drawer.open {
   right: 0;
+}
+
+/* TÍTULO */
+.titulo {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* VACÍO */
+.vacio {
+  text-align: center;
+  margin-top: 50px;
+  color: #888;
+}
+
+/* LISTA SCROLL */
+.items {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* ITEM */
+.item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  padding: 10px;
+  margin-bottom: 10px;
+
+  border-radius: 12px;
+  background: #f8f8f8;
+}
+
+/* IMG */
+.item img {
+  width: 65px;
+  height: 65px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* INFO */
+.info {
+  flex: 1;
+}
+
+.nombre {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.precio {
+  color: #27ae60;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+/* CANTIDAD */
+.cantidad {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cantidad button {
+  border: none;
+  background: #eee;
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.cantidad button:hover {
+  background: #ddd;
+}
+
+/* ELIMINAR */
+.eliminar {
+  border: none;
+  background: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.footer-carrito {
+  border-top: 1px solid #eee;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.footer-carrito p {
+  margin: 0;
+  color: #666;
+}
+
+.footer-carrito h3 {
+  margin: 5px 0;
+}
+
+/* BOTÓN */
+.checkout {
+  width: 100%;
+  padding: 10px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.checkout:hover {
+  background: #219150;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
 }

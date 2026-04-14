@@ -38,9 +38,19 @@ export class CarritoService {
   }
 
   agregar(producto: Producto){
+    if (producto.stock === 0) {
+      console.warn('Producto sin stock');
+      return;
+    }
+
     const items = this.carrito();
     const index = items.findIndex(item => item.producto?.id === producto.id);
     if(index !== -1){
+      if (items[index].cantidad >= producto.stock) {
+        console.warn('Stock máximo alcanzado');
+        return;
+      }
+
       items[index].cantidad++;
     } else {
       items.push({ producto, cantidad: 1 });
@@ -51,6 +61,11 @@ export class CarritoService {
   }
 
   aumentar(item: ItemCarrito){
+    if (item.cantidad >= item.producto.stock) {
+      console.warn('Stock máximo alcanzado');
+      return;
+    }
+
     item.cantidad++;
     this.carrito.set([...this.carrito()]);
     this.guardarCarrito();
