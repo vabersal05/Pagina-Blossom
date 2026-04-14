@@ -84,3 +84,43 @@ body{
   border-radius: 20px;
   text-decoration: none;
 }
+
+.curiosidades {
+  padding: 2rem;
+  text-align: center;
+}
+
+.curiosidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.curiosidad-card {
+  background-color: rgb(254, 220, 237);
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.curiosidad-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.btn-curiosidades {
+  background-color: #e91e8c;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 1rem 0;
+  font-size: 1rem;
+}
+
+.btn-curiosidades:hover {
+  background-color: #c2185b;
+}
