@@ -5,8 +5,14 @@
     <div class="info">
         <h3>{{producto.nombre}}</h3>
         <p>{{producto.marca}}</p>
-        <p class="precio">${{producto.precio}}</p>
-        <span class="badge" *ngIf="producto.stock > 0">Disponible</span>
-        <span class="badge agotado" *ngIf="producto.stock === 0">Agotado</span>
+        <p class="precio">{{producto.precio  | currency:'MXN' }}</p>
+        <span 
+            class="badge"
+            [ngClass]="{
+                'agotado': producto.stock === 0,
+                'disponible': producto.stock > 0
+            }">
+            {{ producto.stock > 0 ? 'Disponible' : 'Agotado' }}
+        </span>
     </div>
 </div>
