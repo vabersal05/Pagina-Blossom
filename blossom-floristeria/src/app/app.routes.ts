@@ -20,5 +20,5 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'mensajes', component: MensajesComponent },
   { path: 'nosotros', component: Nosotros },
-  { path: 'productos/:id', component: Catalogo }
+  { path: 'productos/:id', component: Catalogo },
 ];

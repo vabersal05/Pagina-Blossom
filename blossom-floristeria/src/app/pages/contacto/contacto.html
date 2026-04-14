@@ -1,11 +1,23 @@
-<h2>Contacto 🌸</h2>
+<section class="contacto-home">
+  <h2>Contacto</h2>
+  <p>¿Tienes dudas o quieres un arreglo personalizado?</p>
 
-<form (ngSubmit)="enviar()" #form="ngForm" class="form-contacto">
-  <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre" required />
+  <form (ngSubmit)="enviar()" #form="ngForm" class="form-contacto">
+    <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre" required />
 
-  <input type="email" name="correo" placeholder="Correo" [(ngModel)]="correo" required email />
+    <input type="email" name="correo" placeholder="Correo" [(ngModel)]="correo" required email />
 
-  <textarea name="mensaje" placeholder="Mensaje" [(ngModel)]="mensaje" required></textarea>
+    <input
+      type="text"
+      name="asunto"
+      placeholder="Asunto"
+      [(ngModel)]="asunto"
+      required
+      autocomplete="off"
+    />
 
-  <button type="submit" [disabled]="form.invalid">Enviar</button>
-</form>
+    <textarea name="mensaje" placeholder="Mensaje" [(ngModel)]="mensaje" required></textarea>
+
+    <button type="submit" [disabled]="form.invalid">Enviar</button>
+  </form>
+</section>

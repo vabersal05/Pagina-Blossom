@@ -1,42 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { Producto, Productos } from '../../services/productos';
-import { ProductoDetalle } from "../producto-detalle/producto-detalle";
+import { ProductoDetalle } from '../producto-detalle/producto-detalle';
 import { NgFor, NgIf } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
 import { Auth } from '../../services/auth';
 import { CarritoService } from '../../services/carrito';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-catalogo', 
+  selector: 'app-catalogo',
   standalone: true,
-  imports: [ProductoDetalle, NgFor, NgIf, NgClass],
+  imports: [ProductoDetalle, NgFor, NgIf, NgClass, RouterModule],
   templateUrl: './catalogo.html',
   styleUrl: './catalogo.css',
 })
 export class Catalogo implements OnInit {
   productos: Producto[] = [];
   productoSeleccionado: Producto | null = null;
-  
+
   constructor(
-    private productosService: Productos, 
+    private productosService: Productos,
     private cdr: ChangeDetectorRef,
-    public authService: Auth, 
+    public authService: Auth,
     public carritoService: CarritoService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
-  
+
   ngOnInit(): void {
-    this.productosService.getProductos().subscribe(data => {
+    this.productosService.getProductos().subscribe((data) => {
       this.productos = data;
 
-      this.route.paramMap.subscribe(params => {
+      this.route.paramMap.subscribe((params) => {
         const id = params.get('id');
 
         if (id) {
-          const producto = this.productos.find(p => p.id == +id);
+          const producto = this.productos.find((p) => p.id == +id);
           if (producto) {
             this.productoSeleccionado = producto;
           }
@@ -46,13 +47,13 @@ export class Catalogo implements OnInit {
       this.cdr.detectChanges();
     });
   }
- 
-  seleccionarProducto(producto: Producto){
+
+  seleccionarProducto(producto: Producto) {
     this.productoSeleccionado = producto;
     this.router.navigate(['/productos', producto.id]);
   }
 
-  cerrarDetalle(){
+  cerrarDetalle() {
     this.productoSeleccionado = null;
 
     // regresar a catálogo

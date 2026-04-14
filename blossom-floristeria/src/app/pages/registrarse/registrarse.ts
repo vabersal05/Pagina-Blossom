@@ -16,9 +16,27 @@ export class Registrarse {
   contrasena = '';
   confirmarContrasena = '';
 
-  constructor(private router: Router, private http: HttpClient) {}
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+  ) {}
 
-    registrarse() {
+  registrarse() {
+    if (!this.nombre || !this.email || !this.contrasena || !this.confirmarContrasena) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+
+    if (!this.email.includes('@')) {
+      alert('Correo electrónico no válido');
+      return;
+    }
+
+    if (this.contrasena.length < 6) {
+      alert('La contraseña debe tener al menos 6 caracteres');
+      return;
+    }
+
     if (this.contrasena !== this.confirmarContrasena) {
       alert('Las contraseñas no coinciden');
       return;
@@ -27,10 +45,8 @@ export class Registrarse {
     const datos = {
       nombre: this.nombre,
       email: this.email,
-      contrasena: this.contrasena
+      contrasena: this.contrasena,
     };
-
-    console.log('Enviando datos:', datos);
 
     this.http.post<any>('http://localhost:3000/api/registrarse', datos).subscribe({
       next: () => {
@@ -40,7 +56,7 @@ export class Registrarse {
       error: (err) => {
         console.log('Error:', err);
         alert('Error al registrar, intenta de nuevo');
-      }
+      },
     });
   }
 }

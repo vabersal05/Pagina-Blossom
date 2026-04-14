@@ -1,13 +1,5 @@
-body{
+body {
   padding-top: 70px;
-}
-
-.form-contacto {
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-  margin: auto;
-  gap: 10px;
 }
 
 .form-contacto input,
@@ -18,15 +10,112 @@ body{
 }
 
 .form-contacto button {
-  background: #d93d83;
-  color: white;
-  padding: 10px;
+  padding: 12px;
   border: none;
   border-radius: 20px;
+
+  background: #d93d83;
+  color: white;
+
+  font-weight: bold;
   cursor: pointer;
+
+  transition: 0.2s;
 }
 
 .form-contacto button:disabled {
   background: #ccc;
   cursor: not-allowed;
+}
+
+.form-contacto {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  max-width: 420px;
+  margin: 0 auto;
+
+  background: #ffe4ec;
+  padding: 30px;
+  border-radius: 20px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-contacto input,
+.form-contacto textarea {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #fff;
+  font-size: 14px;
+  color: #5a2a3a;
+}
+
+.form-contacto input:focus,
+.form-contacto textarea:focus {
+  border-color: #d93d83;
+  box-shadow: 0 0 0 2px rgba(217, 61, 131, 0.15);
+}
+
+.form-contacto button {
+  adding: 12px;
+  border: none;
+  border-radius: 10px;
+
+  background: #d93d83;
+  color: white;
+
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.form-contacto button:hover {
+  background: #c12f70;
+  transform: translateY(-2px);
+}
+
+.form-contacto button:disabled {
+  background: #c12f70;
+  transform: translateY(-1px);
+}
+
+.contacto-home h2 {
+  font-size: 32px;
+  color: #d93d83;
+  text-align: center;
+  position: relative;
+}
+
+.contacto-home h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: #d93d83;
+  margin: 10px auto 0;
+  border-radius: 5px;
+}
+
+.contacto-home p {
+  color: #777;
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+.contacto-home .contacto-home {
+  text-align: center;
+  padding: 40px 20px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contacto-home p {
+  text-align: center;
+  color: #7a2c4f;
+  margin-bottom: 25px;
 }
