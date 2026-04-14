@@ -1,3 +1,51 @@
-body{
-  padding-top: 70px;
+.register-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  animation: aparecer 0.3s ease;
+}
+
+.register-container h2 {
+  margin-bottom: 20px;
+}
+
+.register-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.register-container button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background: #2ecc71;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.register-container button:hover {
+  background: #27ae60;
+}
+
+.register-container p {
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.register-container a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+.register-container a:hover {
+  text-decoration: underline;
 }

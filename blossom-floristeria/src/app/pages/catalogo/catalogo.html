@@ -1,43 +1,54 @@
 <div class="catalogo-principal">
-    <div class="header">
-        <h1>Catálogo de Productos</h1>
-        <p>Explora nuestros productos disponibles</p>
-    </div>
+  <div class="header">
+    <h1>Catálogo de Productos</h1>
+    <p>Explora nuestros productos disponibles</p>
+  </div>
 
-    <div class="catalogo">
-        <app-producto-detalle 
-            *ngFor="let producto of productos"
-            [producto]="producto"
-            (click)="seleccionarProducto(producto)">
-        </app-producto-detalle>
-    </div>
-    
-    <!-- MODAL -->
-    <div class="modal" *ngIf="productoSeleccionado" (click)="cerrarDetalle()">
-        <div class="modal-content">
+  <div class="catalogo">
+    <app-producto-detalle
+      *ngFor="let producto of productos"
+      [producto]="producto"
+      (click)="seleccionarProducto(producto)"
+    >
+    </app-producto-detalle>
+  </div>
 
-            <span class="cerrar" (click)="cerrarDetalle()">×</span>
+  <!-- MODAL -->
+  <div class="modal" *ngIf="productoSeleccionado" (click)="cerrarDetalle()">
+    <div class="modal-content">
+      <span class="cerrar" (click)="cerrarDetalle()">×</span>
 
-            <div class="modal-body">
-            <img [src]="'images/catalogo/' + productoSeleccionado.imagen">
+      <div class="modal-body">
+        <img [src]="'images/catalogo/' + productoSeleccionado.imagen" />
 
-            <div class="info-modal">
-                <h2>{{productoSeleccionado.nombre}}</h2>
-                <p>{{productoSeleccionado.descripcion}}</p>
-                <p class="precio">${{productoSeleccionado.precio}}</p>
+        <div class="info-modal">
+          <h2>{{ productoSeleccionado.nombre }}</h2>
+          <p>{{ productoSeleccionado.descripcion }}</p>
+          <p class="precio">${{ productoSeleccionado.precio }}</p>
 
-                <div class="acciones">
-                <button 
-                    [disabled]="!authService.isLoggedIn() || productoSeleccionado.stock === 0"
-                    [ngClass]="{ 'deshabilitado': productoSeleccionado.stock === 0 }"
-                    (click)="carritoService.agregar(productoSeleccionado)">
-                    Agregar al carrito
-                </button>
-                <p *ngIf="!authService.isLoggedIn()" class="mensaje-login">Inicia sesión para comprar</p>
-                </div>
-            </div>
-            </div>
-
+          <div class="acciones">
+            <button
+              [disabled]="!authService.isLoggedIn() || productoSeleccionado.stock === 0"
+              [ngClass]="{ deshabilitado: productoSeleccionado.stock === 0 }"
+              (click)="carritoService.agregar(productoSeleccionado)"
+            >
+              Agregar al carrito
+            </button>
+            <p *ngIf="!authService.isLoggedIn()" class="mensaje-login">
+              Inicia sesión para comprar
+            </p>
+          </div>
         </div>
-        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- CONTACTO -->
+
+<section id="contacto" class="contacto-home">
+  <h2>Contáctanos</h2>
+  <p>¿Tienes dudas o quieres un arreglo personalizado?</p>
+
+  <a routerLink="/contacto" class="btn-contacto"> Formulario de contacto </a>
+</section>

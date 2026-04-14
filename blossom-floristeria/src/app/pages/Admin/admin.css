@@ -1,0 +1,90 @@
+.admin-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+.admin-container > button {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #3498db;
+  color: white;
+  cursor: pointer;
+}
+
+.formulario {
+  background: white;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 20px 0;
+  animation: aparecer 0.3s ease;
+}
+
+.formulario input,
+.formulario textarea {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.formulario span {
+  font-size: 12px;
+  color: #e74c3c;
+}
+
+.formulario button {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: none;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.formulario button[type='submit'] {
+  background: #2ecc71;
+  color: white;
+}
+
+.formulario button[type='button'] {
+  background: #ccc;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+}
+
+thead {
+  background: #f4f4f4;
+}
+
+tr:nth-child(even) {
+  background: #fafafa;
+}
+
+td button {
+  padding: 5px 8px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+td button:first-child {
+  background: #3498db;
+  color: white;
+}
+
+td button:last-child {
+  background: #e74c3c;
+  color: white;
+}

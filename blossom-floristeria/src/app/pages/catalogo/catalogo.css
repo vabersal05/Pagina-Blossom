@@ -1,4 +1,4 @@
-body{
+body {
   padding-top: 70px;
 }
 /* HEADER */
@@ -142,4 +142,20 @@ app-producto-detalle {
 .deshabilitado {
   background: #ccc;
   cursor: not-allowed;
+}
+
+.contacto-home {
+  background: #ffe4ec;
+  padding: 60px;
+  text-align: center;
+}
+
+.btn-contacto {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 25px;
+  background: #d93d83;
+  color: white;
+  border-radius: 20px;
+  text-decoration: none;
 }
