@@ -1,0 +1,27 @@
+<section class="curiosidades">
+  <h2>Belleza para regalar, ciencia para descubrir</h2>
+  <p>¿Sabías que los árboles tienen un nombre científico?</p>
+
+
+    <button  class="btn-curiosidades" (click)="cambiarEstado()" [disabled]="cargando">
+        {{mostrarNombres ? 'Ocultar' : 'Descubrelos' }}
+    </button>
+
+  <div *ngIf="mostrarNombres">
+
+    <p *ngIf="cargando">Cargando nombres...</p>
+
+    <div *ngIf="!cargando" class="curiosidades-grid">
+      <div class="curiosidad-card" *ngFor="let curiosidad of curiosidades">
+        <img 
+          *ngIf="curiosidad.default_image" 
+          [src]="curiosidad.default_image.medium_url" 
+          [alt]="curiosidad.common_name" 
+        />
+        <h3>{{ curiosidad.common_name }}</h3>
+        <p><em>{{ curiosidad.scientific_name[0] }}</em></p>
+      </div>
+    </div>
+
+  </div>
+</section>
