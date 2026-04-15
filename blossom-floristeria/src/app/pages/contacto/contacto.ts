@@ -26,28 +26,25 @@ export class ContactoComponent {
         correo: this.correo,
         asunto: this.asunto,
         mensaje: this.mensaje,
-        fecha: new Date(), //date
+        fecha: new Date(),
       };
 
       this.contactoService.agregarMensaje(nuevoMensaje).subscribe({
         next: () => {
+          console.log('Mensaje enviado:', nuevoMensaje);
           alert('Mensaje enviado correctamente');
           this.enviado = true;
           form.reset();
 
-          // Limpiar campos después de enviar
           this.nombre = '';
           this.correo = '';
           this.asunto = '';
           this.mensaje = '';
-          //console.log('SI JALA');
         },
         error: () => {
           alert('Error al enviar mensaje');
         },
       });
-
-      console.log('Mensaje enviado:', nuevoMensaje);
     }
   }
 }
