@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ContactoService } from '../../services/contacto.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contacto',
@@ -32,7 +33,15 @@ export class ContactoComponent {
       this.contactoService.agregarMensaje(nuevoMensaje).subscribe({
         next: () => {
           console.log('Mensaje enviado:', nuevoMensaje);
-          alert('Mensaje enviado correctamente');
+
+          // Alert bonito
+          Swal.fire({
+            icon: 'success',
+            title: 'Mensaje enviado',
+            text: 'Tu mensaje fue enviado correctamente!',
+            confirmButtonColor: '#d93d83',
+          });
+
           this.enviado = true;
           form.reset();
 
@@ -42,7 +51,11 @@ export class ContactoComponent {
           this.mensaje = '';
         },
         error: () => {
-          alert('Error al enviar mensaje');
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Hubo un error al enviar',
+          });
         },
       });
     }
