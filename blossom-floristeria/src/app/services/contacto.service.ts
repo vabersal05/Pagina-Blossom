@@ -1,27 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactoService {
-  mensajes: any[] = this.cargarMensajes();
+  constructor(private http: HttpClient) {}
 
   agregarMensaje(mensaje: any) {
-    mensaje.fecha = new Date(); //date
-    this.mensajes.push(mensaje);
-    this.guardarMensajes();
+    return this.http.post('http://localhost:3000/api/mensajes', mensaje);
   }
 
   obtenerMensajes() {
-    return this.mensajes;
-  }
+    return this.http.get<any[]>('http://localhost:3000/api/mensajes');
+  } 
 
-  private guardarMensajes() {
-    localStorage.setItem('mensajes', JSON.stringify(this.mensajes));
-  }
-
-  private cargarMensajes() {
-    const data = localStorage.getItem('mensajes');
-    return data ? JSON.parse(data) : [];
-  }
 }

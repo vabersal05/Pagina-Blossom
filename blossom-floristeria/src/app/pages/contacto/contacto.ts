@@ -16,8 +16,8 @@ export class ContactoComponent {
   asunto = '';
   mensaje = '';
   enviado = false;
-
-  constructor(public contactoService: ContactoService) {}
+ 
+  constructor(private contactoService: ContactoService) {}
 
   enviar() {
     if (this.nombre && this.correo && this.mensaje) {
@@ -29,16 +29,23 @@ export class ContactoComponent {
         fecha: new Date(), //date
       };
 
-      this.contactoService.agregarMensaje(nuevoMensaje);
-      alert('Mensaje enviado correctamente!');
-      this.enviado = true;
+      this.contactoService.agregarMensaje(nuevoMensaje).subscribe({
+        next: () => {
+          alert('Mensaje enviado correctamente');
+          this.enviado = true;
+
+          // Limpiar campos después de enviar
+          this.nombre = '';
+          this.correo = '';
+          this.asunto = '';
+          this.mensaje = '';
+        },
+        error: () => {
+          alert('Error al enviar mensaje');
+        }
+      });
 
       console.log('Mensaje enviado:', nuevoMensaje);
-      // Limpiar campos después de enviar
-      this.nombre = '';
-      this.correo = '';
-      this.asunto = '';
-      this.mensaje = '';
     }
   }
 }

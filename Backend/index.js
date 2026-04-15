@@ -113,7 +113,31 @@ app.delete('/api/productos/:id', (req, res) => {
   });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Servidor backend en puerto ${PORT}`);
+// GUARDAR MENSAJE
+app.post('/api/mensajes', (req, res) => {
+  const { nombre, correo, asunto, mensaje } = req.body;
+
+  db.query(
+    'INSERT INTO mensajes (nombre, correo, asunto, mensaje) VALUES (?, ?, ?, ?)',
+    [nombre, correo, asunto, mensaje],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Error al guardar mensaje' });
+      }
+      res.status(201).json({ mensaje: 'Mensaje guardado correctamente' });
+    }
+  );
+});
+
+// OBTENER MENSAJES
+app.get('/api/mensajes', (req, res) => {
+  db.query('SELECT * FROM mensajes', (err, result) => {
+    if (err) return res.status(500).json({ error: 'Error al obtener mensajes' });
+    res.json(result);
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Servidor backend en http://localhost:3000');
 });
