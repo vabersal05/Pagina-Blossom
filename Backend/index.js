@@ -113,6 +113,31 @@ app.delete('/api/productos/:id', (req, res) => {
   });
 });
 
+// GUARDAR MENSAJE
+app.post('/api/mensajes', (req, res) => {
+  const { nombre, correo, asunto, mensaje } = req.body;
+
+  db.query(
+    'INSERT INTO mensajes (nombre, correo, asunto, mensaje) VALUES (?, ?, ?, ?)',
+    [nombre, correo, asunto, mensaje],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({ error: 'Error al guardar mensaje' });
+      }
+      res.status(201).json({ mensaje: 'Mensaje guardado correctamente' });
+    }
+  );
+});
+
+// OBTENER MENSAJES
+app.get('/api/mensajes', (req, res) => {
+  db.query('SELECT * FROM mensajes', (err, result) => {
+    if (err) return res.status(500).json({ error: 'Error al obtener mensajes' });
+    res.json(result);
+  });
+});
+
 app.listen(3000, () => {
   console.log('Servidor backend en http://localhost:3000');
 });

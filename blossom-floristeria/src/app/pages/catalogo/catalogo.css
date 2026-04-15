@@ -16,7 +16,7 @@
   border-radius: 12px;
   font-size: 0.75rem;
   background: #d4edda;
-  color: #155724;
+  color: #57152e;
 }
 
 .agotado {
@@ -48,7 +48,7 @@ app-producto-detalle {
 
 /* CAJA DEL MODAL */
 .modal-content {
-  background: white;
+  background: rgb(255, 235, 244);
   border-radius: 20px;
   padding: 25px;
   width: 650px;
@@ -84,7 +84,7 @@ app-producto-detalle {
 
 .info-modal .precio {
   font-size: 1.3rem;
-  color: green;
+  color: rgb(128, 0, 73);
   font-weight: bold;
   margin-top: 10px;
 }
