@@ -31,37 +31,47 @@
 }
 
 .destacados {
-  padding: 60px 40px;
+  padding: 40px 40px;
   text-align: center;
+  margin-bottom: 50px;
 }
 
 .productos {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+
+  max-width: 900px;
+  margin: auto;
 }
 
 .card {
-  width: 250px;
-  background: rgb(254, 220, 237);
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  background: #ffe4ec;
+  border-radius: 15px;
+  padding: 15px;
+
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+  width: 300px;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 220px;
+  object-fit: contain;
+  border-radius: 10px;
 }
 
 .card h3 {
-  margin: 10px;
+  margin: 10px 0 5px;
 }
 
 .card p {
-  color: #e91e63;
+  color: #5a2a3a;
   font-weight: bold;
 }
 
@@ -84,4 +94,15 @@
 /* Parche para que la img de inicio no salga más abajo y deje espacio en blanco después de hacer global el padding */
 .hero {
   margin-top: -25px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 28px;
+  color: #444;
+  margin-bottom: 5px;
+}
+
+.destacados h2 {
+  margin-top: 10px;
 }
