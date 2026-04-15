@@ -13,35 +13,37 @@
 <!-- PRODUCTOS DESTACADOS -->
 
 <section class="destacados">
-  <h2>Arreglos más vendidos</h2>
+  <h2>Nuestros favoritos ⭑.ᐟ</h2>
+  <br />
+  <br />
 
   <div class="productos">
     <div class="card">
-      <img src="https://i.imgur.com/FKXQ9YB.jpg" />
-      <h3>Rosas románticas</h3>
-      <p>$450 MXN</p>
+      <img src="images/catalogo/IMG_7914.PNG" />
+      <h3>Bouquet de rosas inglesas</h3>
+      <p>$950 MXN</p>
     </div>
 
     <div class="card">
-      <img src="https://i.imgur.com/oYiTqum.jpg" />
-      <h3>Girasoles</h3>
-      <p>$380 MXN</p>
+      <img src="images/catalogo/IMG_7932.PNG" />
+      <h3>Tabla de charcutería con vino</h3>
+      <p>$1100 MXN</p>
     </div>
 
     <div class="card">
-      <img src="https://i.imgur.com/H2V3S8M.jpg" />
-      <h3>Arreglo primaveral</h3>
-      <p>$520 MXN</p>
+      <img src="images/catalogo/IMG_7934.PNG" />
+      <h3>Bouquet acapulco</h3>
+      <p>$700 MXN</p>
     </div>
   </div>
+
+  <br />
+  <p>Encuentralos en nuestra sección de catálogo</p>
 </section>
 
 <!-- CURIOSIDADES -->
 
-<app-floreria
-  [curiosidades]="Curiosidades"
-  [cargando]="cargando"
-  (toggle)="onToggle($event)">
+<app-floreria [curiosidades]="Curiosidades" [cargando]="cargando" (toggle)="onToggle($event)">
 </app-floreria>
 
 <!-- CONTACTO -->
@@ -52,4 +54,3 @@
 
   <a routerLink="/contacto" class="btn-contacto"> Formulario de contacto </a>
 </section>
-
