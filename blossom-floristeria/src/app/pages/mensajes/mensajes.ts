@@ -12,13 +12,13 @@ import { ContactoService } from '../../services/contacto.service';
 export class MensajesComponent implements OnInit {
   mensajes: any[] = [];
 
-  constructor(private contactoService: ContactoService) {}
+  constructor(public contactoService: ContactoService) {}
 
   ngOnInit() {
-    console.log('🔥 MensajesComponent cargado');
+    console.log('MensajesComponent cargado');
 
     this.mensajes = this.contactoService.obtenerMensajes();
 
-    console.log('📦 Mensajes recibidos:', this.mensajes);
+    console.log('Mensajes recibidos:', this.mensajes);
   }
 }

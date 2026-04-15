@@ -17,7 +17,7 @@ export class ContactoComponent {
   mensaje = '';
   enviado = false;
 
-  constructor(private contactoService: ContactoService) {}
+  constructor(public contactoService: ContactoService) {}
 
   enviar() {
     if (this.nombre && this.correo && this.mensaje) {
@@ -26,6 +26,7 @@ export class ContactoComponent {
         correo: this.correo,
         asunto: this.asunto,
         mensaje: this.mensaje,
+        fecha: new Date(), //date
       };
 
       this.contactoService.agregarMensaje(nuevoMensaje);
