@@ -37,8 +37,12 @@ router-outlet + * {
   font-size: 2.2rem;
   color: #333;
 }
- 
+
 .header p {
   color: #777;
   margin-top: 5px;
+}
+
+body {
+  padding-top: 70px;
 }

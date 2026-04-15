@@ -80,3 +80,8 @@
   border-radius: 20px;
   text-decoration: none;
 }
+
+/* Parche para que la img de inicio no salga más abajo y deje espacio en blanco después de hacer global el padding */
+.hero {
+  margin-top: -25px;
+}
