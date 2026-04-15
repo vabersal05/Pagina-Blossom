@@ -16,10 +16,10 @@ export class ContactoComponent {
   asunto = '';
   mensaje = '';
   enviado = false;
- 
+
   constructor(private contactoService: ContactoService) {}
 
-  enviar() {
+  enviar(form: any) {
     if (this.nombre && this.correo && this.mensaje) {
       const nuevoMensaje = {
         nombre: this.nombre,
@@ -33,16 +33,18 @@ export class ContactoComponent {
         next: () => {
           alert('Mensaje enviado correctamente');
           this.enviado = true;
+          form.reset();
 
           // Limpiar campos después de enviar
           this.nombre = '';
           this.correo = '';
           this.asunto = '';
           this.mensaje = '';
+          //console.log('SI JALA');
         },
         error: () => {
           alert('Error al enviar mensaje');
-        }
+        },
       });
 
       console.log('Mensaje enviado:', nuevoMensaje);
