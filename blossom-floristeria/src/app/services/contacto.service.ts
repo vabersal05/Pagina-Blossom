@@ -7,6 +7,7 @@ export class ContactoService {
   mensajes: any[] = this.cargarMensajes();
 
   agregarMensaje(mensaje: any) {
+    mensaje.fecha = new Date(); //date
     this.mensajes.push(mensaje);
     this.guardarMensajes();
   }
