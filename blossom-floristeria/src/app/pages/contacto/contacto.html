@@ -4,7 +4,7 @@
     <p class="subtitulo">¿Tienes dudas o quieres un arreglo personalizado?</p>
   </div>
 
-  <form (ngSubmit)="enviar()" #form="ngForm" class="form-contacto">
+  <form (ngSubmit)="enviar(form)" #form="ngForm" class="form-contacto">
     <input type="text" name="nombre" placeholder="Nombre" [(ngModel)]="nombre" required />
 
     <input type="email" name="correo" placeholder="Correo" [(ngModel)]="correo" required email />
@@ -17,7 +17,7 @@
       required
       autocomplete="off"
     />
- 
+
     <textarea name="mensaje" placeholder="Mensaje" [(ngModel)]="mensaje" required></textarea>
 
     <button type="submit" [disabled]="form.invalid">Enviar</button>
