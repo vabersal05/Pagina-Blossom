@@ -26,6 +26,7 @@ export class ContactoComponent {
         correo: this.correo,
         asunto: this.asunto,
         mensaje: this.mensaje,
+        fecha: new Date(), //date
       };
 
       this.contactoService.agregarMensaje(nuevoMensaje).subscribe({
