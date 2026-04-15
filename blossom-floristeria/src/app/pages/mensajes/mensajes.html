@@ -9,7 +9,7 @@
   <p><strong>Mensaje:</strong> {{ m.mensaje }}</p>
 </div>
 -->
-<h2>Mensajes recibidos</h2>
+<h1>Mensajes recibidos</h1>
 
 <div *ngIf="mensajes.length > 0; else vacio" class="mensajes">
   <div *ngFor="let m of mensajes" class="card">

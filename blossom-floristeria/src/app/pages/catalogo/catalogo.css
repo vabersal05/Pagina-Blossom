@@ -6,9 +6,9 @@
   padding: 20px 40px;
 
   max-width: 1200px;
-  margin: 0 auto; 
+  margin: 0 auto;
 }
- 
+
 .badge {
   display: inline-block;
   margin-top: 8px;
@@ -37,6 +37,7 @@ app-producto-detalle {
   height: 100%;
 
   background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
 
   display: flex;
   justify-content: center;
@@ -49,23 +50,25 @@ app-producto-detalle {
 .modal-content {
   background: white;
   border-radius: 20px;
-  padding: 20px;
-  width: 600px;
+  padding: 25px;
+  width: 650px;
   max-width: 90%;
-
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
   animation: aparecer 0.3s ease;
 }
 
 /* CONTENIDO INTERNO */
 .modal-body {
   display: flex;
-  gap: 20px;
+  gap: 25px;
+  align-items: center;
 }
 
 .modal-body img {
   width: 250px;
   height: 250px;
-  object-fit: contain;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 /* INFO */
@@ -75,12 +78,15 @@ app-producto-detalle {
 
 .info-modal h2 {
   margin-bottom: 10px;
+  font-size: 22px;
+  color: black;
 }
 
 .info-modal .precio {
   font-size: 1.3rem;
   color: green;
   font-weight: bold;
+  margin-top: 10px;
 }
 
 /* BOTONES */
@@ -90,10 +96,17 @@ app-producto-detalle {
 
 .acciones button {
   margin-right: 10px;
-  padding: 8px 12px;
+  padding: 10px 15px;
   border: none;
-  border-radius: 8px;
+  border-radius: 20px;
+
+  background: #d93d83;
+  color: white;
+
+  font-weight: bold;
   cursor: pointer;
+
+  transition: 0.3s;
 }
 
 .eliminar {

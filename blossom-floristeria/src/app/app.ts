@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { NgIf, NgFor } from '@angular/common';
 import { CurrencyPipe } from '@angular/common';
 import { Auth } from './services/auth';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { Navbar } from './components/navbar/navbar';
 import { NavbarAdmin } from './components/navbar-admin/navbar-admin';
@@ -23,12 +23,15 @@ import { CarritoService } from './services/carrito';
     NgIf,
     NgFor,
     CurrencyPipe,
-    HttpClientModule
+    HttpClientModule,
   ],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
-  constructor(public carritoService: CarritoService, public authService: Auth) {}
+  constructor(
+    public carritoService: CarritoService,
+    public authService: Auth,
+  ) {}
   protected readonly title = signal('blossom-floristeria');
 }

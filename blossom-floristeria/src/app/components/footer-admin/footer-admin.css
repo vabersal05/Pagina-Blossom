@@ -1,38 +1,22 @@
-.footer{
-  background:#7a2394;
-  color:white;
-  padding:15px;
-} 
-
-.footer-container{
-  display:flex;
-  justify-content:space-around;
+.footer {
+  background: #7a2394;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-.footer a{
-  display:block;
-  color:white;
-  text-decoration:none;
-  margin:5px 0;
+.footer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
-.copy{
-  text-align:center;
-  margin-top:20px;
+.footer-container div {
+  text-align: center;
 }
 
-.redes{
-  margin-top:10px;
-  display:flex;
-  gap:15px;
-}
-
-.redes a{
-  font-size:22px;
-  color:white;
-  transition:0.3s;
-}
-
-.redes a:hover{
-  transform:scale(1.2);
+.copy {
+  margin-top: 10px;
+  font-size: 14px;
 }

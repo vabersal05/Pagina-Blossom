@@ -10,6 +10,7 @@
   left: 0;
   width: 100%;
   z-index: 1000;
+  height: 70px;
 }
 
 .menu {
@@ -46,8 +47,8 @@
 }
 
 .logo img {
-  height: 40px;
-  width: auto;
+  height: 60px !important;
+  width: auto !important;
 }
 
 .login-link {
