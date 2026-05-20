@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; //USO DE HTTPCLIENT
-import { HttpClientModule } from '@angular/common/http'; //IMPORTAR EL MODULO DE HTTPCLIENT
+import { HttpClient } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http'; 
+import { environment } from '../../../enviroments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrarse',
@@ -23,22 +25,42 @@ export class Registrarse {
 
   registrarse() {
     if (!this.nombre || !this.email || !this.contrasena || !this.confirmarContrasena) {
-      alert('Todos los campos son obligatorios');
+      Swal.fire({
+            icon: 'success',
+            title: 'Mensaje enviado',
+            text: 'Tu mensaje fue enviado correctamente!',
+            confirmButtonColor: '#d93d83',
+          });
       return;
     }
 
     if (!this.email.includes('@')) {
-      alert('Correo electrónico no válido');
+      Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Correo electrónico no válido',
+            confirmButtonColor: '#d93d83',
+          });
       return;
     }
 
     if (this.contrasena.length < 6) {
-      alert('La contraseña debe tener al menos 6 caracteres');
+      Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'La contraseña debe tener al menos 6 caracteres',
+            confirmButtonColor: '#d93d83',
+          });
       return;
     }
 
     if (this.contrasena !== this.confirmarContrasena) {
-      alert('Las contraseñas no coinciden');
+      Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Las contraseñas no coinciden',
+            confirmButtonColor: '#d93d83',
+          });
       return;
     }
 
@@ -48,14 +70,24 @@ export class Registrarse {
       contrasena: this.contrasena,
     };
 
-    this.http.post<any>('http://localhost:3000/api/registrarse', datos).subscribe({
+    this.http.post<any>(`${environment.apiUrl}/registrarse`, datos).subscribe({
       next: () => {
-        alert('Cuenta creada correctamente');
+        Swal.fire({
+            icon: 'success',
+            title: 'Registro exitoso',
+            text: 'Tu cuenta fue creada correctamente!',
+            confirmButtonColor: '#d93d83',
+          });
         this.router.navigate(['/iniciar-sesion']);
       },
       error: (err) => {
         console.log('Error:', err);
-        alert('Error al registrar, intenta de nuevo');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al registrar, intenta de nuevo',
+          confirmButtonColor: '#d93d83',
+        });
       },
     });
   }

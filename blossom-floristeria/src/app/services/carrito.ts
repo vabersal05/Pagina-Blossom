@@ -1,7 +1,10 @@
 import { Injectable, signal } from '@angular/core';
 import { Producto } from './productos';
+import { HttpClient } from '@angular/common/http';
+import { Auth } from './auth';
+import { environment } from '../../enviroments/environment';
 
-export interface ItemCarrito{
+export interface ItemCarrito {
   producto: Producto;
   cantidad: number;
 }
@@ -10,8 +13,16 @@ export interface ItemCarrito{
   providedIn: 'root',
 })
 export class CarritoService {
+
   abierto = signal(false);
-  
+
+  carrito = signal<ItemCarrito[]>([]);
+
+  constructor(
+    private http: HttpClient,
+    private authService: Auth
+  ) {}
+
   abrir() {
     this.abierto.set(true);
   }
@@ -24,75 +35,156 @@ export class CarritoService {
     this.abierto.set(!this.abierto());
   }
 
-  carrito = signal<ItemCarrito[]>(this.cargarCarrito());
-  
-  constructor() {}
-
-  private guardarCarrito(){
-    localStorage.setItem('carrito', JSON.stringify(this.carrito()));
+  // OBTENER ID DEL CLIENTE
+  private getClienteId(): number {
+    return this.authService.getUser()?.id;
   }
 
-  private cargarCarrito(){
-    const data = localStorage.getItem('carrito');
-    return data ? JSON.parse(data) : [];
+  // CARGAR CARRITO DESDE MYSQL
+  cargarCarritoDB() {
+
+    const clienteId = this.getClienteId();
+
+    if (!clienteId) return;
+
+    this.http.get<ItemCarrito[]>(
+      `${environment.apiUrl}/carrito/${clienteId}`
+    ).subscribe({
+
+      next: (data) => {
+        this.carrito.set(data);
+      },
+
+      error: () => {
+        console.error('Error al cargar carrito');
+      }
+
+    });
+
   }
 
-  agregar(producto: Producto){
+  // AGREGAR PRODUCTO
+  agregar(producto: Producto) {
+
     if (producto.stock === 0) {
       console.warn('Producto sin stock');
       return;
     }
 
-    const items = this.carrito();
-    const index = items.findIndex(item => item.producto?.id === producto.id);
-    if(index !== -1){
-      if (items[index].cantidad >= producto.stock) {
-        console.warn('Stock máximo alcanzado');
-        return;
+    const clienteId = this.getClienteId();
+
+    this.http.post(
+      `${environment.apiUrl}/carrito`,
+      {
+        cliente_id: clienteId,
+        producto_id: producto.id,
+        cantidad: 1
+      }
+    ).subscribe({
+
+      next: () => {
+        this.cargarCarritoDB();
+      },
+
+      error: () => {
+        console.error('Error al agregar producto');
       }
 
-      items[index].cantidad++;
-    } else {
-      items.push({ producto, cantidad: 1 });
-    }
+    });
 
-    this.carrito.set([...items]);
-    this.guardarCarrito();
   }
 
-  aumentar(item: ItemCarrito){
+  // AUMENTAR CANTIDAD
+  aumentar(item: ItemCarrito) {
     if (item.cantidad >= item.producto.stock) {
       console.warn('Stock máximo alcanzado');
       return;
     }
 
-    item.cantidad++;
-    this.carrito.set([...this.carrito()]);
-    this.guardarCarrito();
+    this.http.put(
+      `${environment.apiUrl}/carrito`,
+      {
+        cliente_id: this.getClienteId(),
+        producto_id: item.producto.id,
+        cantidad: item.cantidad + 1
+      }
+    ).subscribe({
+
+      next: () => {
+        this.cargarCarritoDB();
+      },
+
+      error: () => {
+        console.error('Error al aumentar cantidad');
+      }
+
+    });
   }
 
-  disminuir(item: ItemCarrito){
-    if(item.cantidad > 1){
-      item.cantidad--;
-    } else {
+  // DISMINUIR CANTIDAD
+  disminuir(item: ItemCarrito) {
+
+    // SI LLEGA A 1 → ELIMINAMOS
+    if (item.cantidad <= 1) {
       this.eliminar(item);
+      return;
     }
-    this.carrito.set([...this.carrito()]);
-    this.guardarCarrito();
+
+    this.http.put(
+      `${environment.apiUrl}/carrito`,
+      {
+        cliente_id: this.getClienteId(),
+        producto_id: item.producto.id,
+        cantidad: item.cantidad - 1
+      }
+    ).subscribe({
+
+      next: () => {
+        this.cargarCarritoDB();
+      },
+
+      error: () => {
+        console.error('Error al disminuir cantidad');
+      }
+
+    });
   }
 
-  eliminar(item: ItemCarrito){
-    const nuevo = this.carrito().filter(i => i.producto?.id !== item.producto?.id);
-    this.carrito.set(nuevo);
-    this.guardarCarrito();
+  // ELIMINAR PRODUCTO
+  eliminar(item: ItemCarrito) {
+
+    this.http.delete(
+      `${environment.apiUrl}/carrito`,
+      {
+        body: {
+          cliente_id: this.getClienteId(),
+          producto_id: item.producto.id
+        }
+      }
+    ).subscribe({
+
+      next: () => {
+        this.cargarCarritoDB();
+      }
+
+    });
+
   }
 
-  total(){
-    return this.carrito().reduce((acc, i) => acc + i.producto.precio * i.cantidad, 0);
+  // TOTAL
+  total() {
+    return this.carrito().reduce(
+      (acc, i) => acc + i.producto.precio * i.cantidad,
+      0
+    );
   }
 
-  cantidadTotal(){
-    return this.carrito().reduce((acc, i) => acc + i.cantidad, 0);
+  // CANTIDAD TOTAL
+  cantidadTotal() {
+    return this.carrito().reduce(
+      (acc, i) => acc + i.cantidad,
+      0
+    );
   }
+
 }
-
