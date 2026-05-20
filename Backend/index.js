@@ -16,17 +16,26 @@ app.get('/', (req, res) => {
 app.post('/api/registrarse', (req, res) => {
   const { nombre, email, contrasena } = req.body;
 
-  console.log('Datos recibidos:', { nombre, email, contrasena });
-
+  // VERIFICAR SI EL EMAIL YA EXISTE
   db.query(
-    'INSERT INTO clientes (nombre, email, contrasena) VALUES (?, ?, ?)',
-    [nombre, email, contrasena],
+    'SELECT * FROM clientes WHERE email = ?',
+    [email],
     (err, result) => {
-      if (err) {
-        console.log('Error SQL:', err);
-        return res.status(500).json({ error: 'Error al registrar cliente' });
+      if (err) return res.status(500).json({ error: 'Error al verificar email' });
+
+      if (result.length > 0) {
+        return res.status(400).json({ error: 'Este correo ya está registrado' });
       }
-      res.status(201).json({ mensaje: 'Cliente registrado correctamente' });
+
+      // SI NO EXISTE, REGISTRAR
+      db.query(
+        'INSERT INTO clientes (nombre, email, contrasena) VALUES (?, ?, ?)',
+        [nombre, email, contrasena],
+        (err, result) => {
+          if (err) return res.status(500).json({ error: 'Error al registrar cliente' });
+          res.status(201).json({ mensaje: 'Cliente registrado correctamente' });
+        }
+      );
     }
   );
 });

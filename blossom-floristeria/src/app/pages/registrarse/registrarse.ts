@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; //USO DE HTTPCLIENT
-import { HttpClientModule } from '@angular/common/http'; //IMPORTAR EL MODULO DE HTTPCLIENT
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrarse',
@@ -23,22 +24,42 @@ export class Registrarse {
 
   registrarse() {
     if (!this.nombre || !this.email || !this.contrasena || !this.confirmarContrasena) {
-      alert('Todos los campos son obligatorios');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Todos los campos son obligatorios',
+        confirmButtonColor: '#e91e8c',
+      });
       return;
     }
 
     if (!this.email.includes('@')) {
-      alert('Correo electrónico no válido');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Correo inválido',
+        text: 'Ingresa un correo electrónico válido',
+        confirmButtonColor: '#e91e8c',
+      });
       return;
     }
 
     if (this.contrasena.length < 6) {
-      alert('La contraseña debe tener al menos 6 caracteres');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Contraseña muy corta',
+        text: 'La contraseña debe tener al menos 6 caracteres',
+        confirmButtonColor: '#e91e8c',
+      });
       return;
     }
 
     if (this.contrasena !== this.confirmarContrasena) {
-      alert('Las contraseñas no coinciden');
+      Swal.fire({
+        icon: 'error',
+        title: 'Las contraseñas no coinciden',
+        text: 'Verifica que ambas contraseñas sean iguales',
+        confirmButtonColor: '#e91e8c',
+      });
       return;
     }
 
@@ -50,12 +71,31 @@ export class Registrarse {
 
     this.http.post<any>('http://localhost:3000/api/registrarse', datos).subscribe({
       next: () => {
-        alert('Cuenta creada correctamente');
-        this.router.navigate(['/iniciar-sesion']);
+        Swal.fire({
+          icon: 'success',
+          title: '¡Cuenta creada!',
+          text: 'Tu cuenta fue creada correctamente',
+          confirmButtonColor: '#e91e8c',
+        }).then(() => {
+          this.router.navigate(['/iniciar-sesion']);
+        });
       },
       error: (err) => {
-        console.log('Error:', err);
-        alert('Error al registrar, intenta de nuevo');
+        if (err.status === 400) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Correo ya registrado',
+            text: 'Este correo ya tiene una cuenta, usa otro o inicia sesión',
+            confirmButtonColor: '#e91e8c',
+          });
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Ocurrió un error al registrar, intenta de nuevo',
+            confirmButtonColor: '#e91e8c',
+          });
+        }
       },
     });
   }

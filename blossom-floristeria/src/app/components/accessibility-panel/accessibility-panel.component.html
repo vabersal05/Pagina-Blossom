@@ -1,0 +1,29 @@
+<button class="a11y-fab" (click)="open = !open" aria-label="Opciones de accesibilidad">
+  ♿
+</button>
+
+<div class="a11y-panel" *ngIf="open" role="dialog" aria-label="Panel de accesibilidad">
+  <h3>Accesibilidad</h3>
+
+  <label>Tamaño de texto</label>
+  <select [value]="prefs.fontSize"
+          (change)="update({fontSize: $any($event.target).value})">
+    <option value="normal">Normal</option>
+    <option value="large">Grande</option>
+    <option value="xlarge">Muy grande</option>
+  </select>
+
+  <label class="checkbox-label">
+    <input type="checkbox"
+           [checked]="prefs.contrast === 'high'"
+           (change)="update({contrast: $any($event.target).checked ? 'high' : 'normal'})">
+    Alto contraste
+  </label>
+
+  <label class="checkbox-label">
+    <input type="checkbox"
+           [checked]="prefs.reduceMotion"
+           (change)="update({reduceMotion: $any($event.target).checked})">
+    Reducir animaciones
+  </label>
+</div>

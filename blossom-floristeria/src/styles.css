@@ -46,3 +46,14 @@ router-outlet + * {
 body {
   padding-top: 70px;
 }
+.a11y-font-large  { font-size: 112% !important; }
+.a11y-font-xlarge { font-size: 130% !important; }
+
+html.a11y-high-contrast {
+  filter: contrast(1.5) invert(1) hue-rotate(180deg);
+}
+
+html[data-reduce-motion="true"] * {
+  animation: none !important;
+  transition: none !important;
+}

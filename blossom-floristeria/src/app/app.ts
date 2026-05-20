@@ -10,6 +10,7 @@ import { NavbarAdmin } from './components/navbar-admin/navbar-admin';
 import { Footer } from './components/footer/footer';
 import { FooterAdmin } from './components/footer-admin/footer-admin';
 import { CarritoService } from './services/carrito';
+import { AccessibilityPanelComponent } from './components/accessibility-panel/accessibility-panel.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { CarritoService } from './services/carrito';
     NgFor,
     CurrencyPipe,
     HttpClientModule,
+    AccessibilityPanelComponent,
   ],
   templateUrl: './app.html',
   styleUrl: './app.css',
