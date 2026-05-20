@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef } from '@angular/core';
+import { environment } from '../../../enviroments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin',
@@ -21,8 +23,8 @@ export class Admin implements OnInit {
     nombre: new FormControl('', [Validators.required, Validators.minLength(3)]),
     categoria: new FormControl('', Validators.required),
     marca: new FormControl('', Validators.required),
-    precio: new FormControl(0, [Validators.required, Validators.min(0.01)]),
-    stock: new FormControl(0, [Validators.required, Validators.min(0)]),
+    precio: new FormControl(null, [Validators.required, Validators.min(0.01)]),
+    stock: new FormControl(null, [Validators.required, Validators.min(0)]),
     imagen: new FormControl(''),
     descripcion: new FormControl('', [Validators.required, Validators.minLength(10)])
   });
@@ -38,30 +40,32 @@ export class Admin implements OnInit {
   }
 
   obtenerProductos() {
-    this.http.get<any[]>('http://localhost:3000/api/productos').subscribe({
+    this.http.get<any[]>(`${environment.apiUrl}/productos`).subscribe({
     next: (res) => {
       this.productos = res;
       this.cdr.detectChanges();
     },
-    error: () => alert('Error al obtener productos')
+    error: () => {
+      Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error al obtener productos',
+            confirmButtonColor: '#d93d83',
+          });
+    }
   });
   }
 
   seleccionarImagen(evento: any) {
     const archivo = evento.target.files[0];
     if (!archivo) return;
-
-    const lector = new FileReader();
-    lector.onload = (e: any) => {
-      this.formularioProducto.patchValue({ imagen: e.target.result });
-    };
-    lector.readAsDataURL(archivo);
+    this.formularioProducto.patchValue({ imagen: archivo.name });
   }
 
   abrirFormulario() {
     this.editando = false;
     this.idEditando = null;
-    this.formularioProducto.reset({ precio: 0, stock: 0 });
+    this.formularioProducto.reset({ });
     this.mostrarFormulario = true;
   }
 
@@ -70,17 +74,27 @@ export class Admin implements OnInit {
     if (this.formularioProducto.invalid) return;
 
     if (this.editando) {
-      this.http.put(`http://localhost:3000/api/productos/${this.idEditando}`, this.formularioProducto.value).subscribe({
+      this.http.put(`${environment.apiUrl}/productos/${this.idEditando}`, this.formularioProducto.value).subscribe({
         next: () => {
-          alert('Producto actualizado correctamente');
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto actualizado',
+                text: 'El producto fue actualizado correctamente!',
+                confirmButtonColor: '#d93d83',
+          });
           this.mostrarFormulario = false;
           this.obtenerProductos();
         }
       });
     } else {
-      this.http.post('http://localhost:3000/api/productos', this.formularioProducto.value).subscribe({
+      this.http.post(`${environment.apiUrl}/productos`, this.formularioProducto.value).subscribe({
         next: () => {
-          alert('Producto creado correctamente');
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto creado',
+            text: 'El producto fue creado correctamente!',
+            confirmButtonColor: '#d93d83',
+          });
           this.mostrarFormulario = false;
           this.obtenerProductos();
         }
@@ -97,9 +111,14 @@ export class Admin implements OnInit {
 
   eliminarProducto(id: number) {
     if (confirm('¿Deseas eliminar este producto?')) {
-      this.http.delete(`http://localhost:3000/api/productos/${id}`).subscribe({
+      this.http.delete(`${environment.apiUrl}/productos/${id}`).subscribe({
         next: () => {
-          alert('Producto eliminado correctamente');
+          Swal.fire({
+            icon: 'success',
+            title: 'Producto eliminado',
+            text: 'El producto fue eliminado correctamente!',
+            confirmButtonColor: '#d93d83',
+          });
           this.obtenerProductos();
         }
       });

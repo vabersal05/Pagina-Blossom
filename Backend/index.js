@@ -59,7 +59,13 @@ app.post('/api/iniciar-sesion', (req, res) => {
         [usuario, contrasena],
         (err, resultCliente) => {
           if (resultCliente.length > 0) {
-            return res.json({ rol: 'cliente' });
+            const cliente = resultCliente[0];
+            return res.json({
+              id: cliente.id,
+              nombre: cliente.nombre,
+              email: cliente.email,
+              rol: 'cliente'
+            });
           }
           return res.status(401).json({ error: 'Credenciales incorrectas' });
         }
@@ -145,6 +151,225 @@ app.get('/api/mensajes', (req, res) => {
     if (err) return res.status(500).json({ error: 'Error al obtener mensajes' });
     res.json(result);
   });
+});
+
+// ===============================
+// OBTENER CARRITO DE UN CLIENTE
+// ===============================
+app.get('/api/carrito/:clienteId', (req, res) => {
+
+  const clienteId = req.params.clienteId;
+
+  db.query(`
+    SELECT 
+      carrito.id,
+      carrito.cantidad,
+      productos.id AS producto_id,
+      productos.nombre,
+      productos.precio,
+      productos.imagen,
+      productos.stock
+    FROM carrito
+    INNER JOIN productos 
+      ON carrito.producto_id = productos.id
+    WHERE carrito.cliente_id = ?
+  `,
+  [clienteId],
+  (err, result) => {
+
+    if (err) {
+      console.log(err);
+      return res.status(500).json({
+        error: 'Error al obtener carrito'
+      });
+    }
+
+    // FORMATEAMOS LOS DATOS
+    const carritoFormateado = result.map(item => ({
+      producto: {
+        id: item.producto_id,
+        nombre: item.nombre,
+        precio: item.precio,
+        imagen: item.imagen,
+        stock: item.stock
+      },
+      cantidad: item.cantidad
+    }));
+
+    res.json(carritoFormateado);
+
+  });
+
+});
+
+
+// ===============================
+// AGREGAR PRODUCTO AL CARRITO
+// ===============================
+app.post('/api/carrito', (req, res) => {
+
+  const {
+    cliente_id,
+    producto_id,
+    cantidad
+  } = req.body;
+
+  // VERIFICAMOS SI YA EXISTE
+  db.query(
+    'SELECT * FROM carrito WHERE cliente_id = ? AND producto_id = ?',
+    [cliente_id, producto_id],
+    (err, result) => {
+
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          error: 'Error al verificar carrito'
+        });
+      }
+
+      // SI YA EXISTE → ACTUALIZAMOS CANTIDAD
+      if (result.length > 0) {
+
+        db.query(
+          'UPDATE carrito SET cantidad = cantidad + ? WHERE cliente_id = ? AND producto_id = ?',
+          [cantidad, cliente_id, producto_id],
+          (err2) => {
+
+            if (err2) {
+              console.log(err2);
+              return res.status(500).json({
+                error: 'Error al actualizar carrito'
+              });
+            }
+
+            res.json({
+              mensaje: 'Cantidad actualizada'
+            });
+
+          }
+        );
+
+      } else {
+
+        // SI NO EXISTE → INSERTAMOS
+        db.query(
+          'INSERT INTO carrito (cliente_id, producto_id, cantidad) VALUES (?, ?, ?)',
+          [cliente_id, producto_id, cantidad],
+          (err3) => {
+
+            if (err3) {
+              console.log(err3);
+              return res.status(500).json({
+                error: 'Error al agregar producto'
+              });
+            }
+
+            res.status(201).json({
+              mensaje: 'Producto agregado al carrito'
+            });
+
+          }
+        );
+
+      }
+
+    }
+  );
+
+});
+
+
+// ===============================
+// ACTUALIZAR CANTIDAD
+// ===============================
+app.put('/api/carrito', (req, res) => {
+
+  const {
+    cliente_id,
+    producto_id,
+    cantidad
+  } = req.body;
+
+  db.query(
+    'UPDATE carrito SET cantidad = ? WHERE cliente_id = ? AND producto_id = ?',
+    [cantidad, cliente_id, producto_id],
+    (err, result) => {
+
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          error: 'Error al actualizar cantidad'
+        });
+      }
+
+      res.json({
+        mensaje: 'Cantidad actualizada correctamente'
+      });
+
+    }
+  );
+
+});
+
+
+// ===============================
+// ELIMINAR PRODUCTO DEL CARRITO
+// ===============================
+app.delete('/api/carrito', (req, res) => {
+
+  const {
+    cliente_id,
+    producto_id
+  } = req.body;
+
+  db.query(
+    'DELETE FROM carrito WHERE cliente_id = ? AND producto_id = ?',
+    [cliente_id, producto_id],
+    (err, result) => {
+
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          error: 'Error al eliminar producto'
+        });
+      }
+
+      res.json({
+        mensaje: 'Producto eliminado correctamente'
+      });
+
+    }
+  );
+
+});
+
+
+// ===============================
+// VACIAR CARRITO COMPLETO
+// ===============================
+app.delete('/api/carrito/vaciar/:clienteId', (req, res) => {
+
+  const clienteId = req.params.clienteId;
+
+  db.query(
+    'DELETE FROM carrito WHERE cliente_id = ?',
+    [clienteId],
+    (err, result) => {
+
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          error: 'Error al vaciar carrito'
+        });
+      }
+
+      res.json({
+        mensaje: 'Carrito vaciado correctamente'
+      });
+
+    }
+  );
+
 });
 
 const PORT = process.env.PORT || 3000;
