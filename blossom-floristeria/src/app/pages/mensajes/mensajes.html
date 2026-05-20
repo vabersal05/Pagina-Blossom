@@ -1,14 +1,3 @@
-<!--<h2>Mensajes de contactowaw</h2>
-
-<div *ngIf="mensajes.length === 0">No hay mensajes aún.</div>
-
-<div *ngFor="let m of mensajes">
-  <hr />
-  <p><strong>Nombre:</strong> {{ m.nombre }}</p>
-  <p><strong>Correo:</strong> {{ m.correo }}</p>
-  <p><strong>Mensaje:</strong> {{ m.mensaje }}</p>
-</div>
--->
 <h1>Mensajes recibidos</h1>
 
 <div *ngIf="mensajes.length > 0; else vacio" class="mensajes">
@@ -17,7 +6,6 @@
     <p><b>Correo:</b> {{ m.correo }}</p>
     <p><b>Asunto:</b> {{ m.asunto }}</p>
     <p><b>Mensaje:</b> {{ m.mensaje }}</p>
-    <p><b>Fecha:</b> {{ m.fecha | date: 'dd/MM/yyyy HH:mm' }}</p>
   </div>
 </div>
 

@@ -34,7 +34,6 @@ export class ContactoComponent {
         next: () => {
           console.log('Mensaje enviado:', nuevoMensaje);
 
-          // Alert bonito
           Swal.fire({
             icon: 'success',
             title: 'Mensaje enviado',
